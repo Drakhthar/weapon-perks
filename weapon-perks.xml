@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<elements>
+    -<info>
+        <name>Weapon Perks</name>
+       -<update version="1.0.0"> </update>
+    </info> 
+        <!--weapon perks option-->
+    -<element name="Crippling blow" type="Weapon Property" source="DMG" id="ID_DRAKHTHAR_DMG_CRIPPLING_BLOW_WEAPON_PERKS">
+        <description>
+            <p>When you hit a creature with a melee weapon attack. On a hit, you can forgo the normal weapon damage, if you do, you deal damage equal to your strength modifier and the target must succeed on a Constitution saving throw or their movement is reduced by half until the end of its next turn.</p>
+        </description>
+        <sheet>
+            <description>When you hit a creature with a melee weapon attack, you can forgo the normal weapon damage and deal {{strength:modifier}} damage and the target must succeed on a DC {{crippling blow:dc}} Constitution saving throw or their movement is reduced by half until the end of its next turn. </description>
+        </sheet>
+       -<rules>
+            <stat name="crippling blow:dc" value="8"/>
+            <stat name="crippling blow:dc" value="proficiency"/>
+            <if>
+                <condition var="strength:modifier" operator="&#62;">dexterity:modifier</condition>
+                <statements>
+                    <stat name="crippling blow:dc" value="strength:modifier"/>
+                </statements>
+            </if>
+            <else>
+                <statements>
+                    <stat name="crippling blow:dc" value="dexterity:modifier"/>
+                </statements>
+            </else>
+        </rules> 
+    </element>
+    -<element name="Club" id="ID_WOTC_PHB_WEAPON_CLUB" source="Player's Handbook" type="Weapon">
+        <supports>ID_INTERNAL_WEAPON_CATEGORY_SIMPLE_MELEE, ID_INTERNAL_DAMAGE_TYPE_BLUDGEONING, ID_INTERNAL_WEAPON_PROPERTY_LIGHT, ID_INTERNAL_WEAPON_GROUP_CLUBS, ID_DRAKHTHAR_DMG_CRIPPLING_BLOW_WEAPON_PERKS</supports>
+        -<description>
+            <p/>
+        </description>
+        -<setters>
+            <set name="category">Weapons</set>
+            <set name="cost" currency="sp">1</set>
+            <set name="weight" lb="2">2 lb.</set>
+            <set name="slot">onehand</set>
+            <set name="damage" type="bludgeoning">1d4</set>
+            <set name="proficiency">ID_PROFICIENCY_WEAPON_PROFICIENCY_CLUB</set>
+        </setters>
+    </element>
+</elements>
